@@ -1,0 +1,49 @@
+1. Installation
+pkg updateopkg install zerotier
+
+2, configuration
+Edit the configuration file: /etc/config/zerotier , change the 0 of option enabled '0' to 1, and change the list join '**' to your own Network ID.
+
+or
+
+mkdir -p /etc/zerotier
+uci set zerotier.openwrt_network=zerotier
+uci add_list zerotier.openwrt_network.join='privatenetworkID'
+uci set zerotier.openwrt_network.enabled='1'
+uci set zerotier.openwrt_network.config_path='/etc/zerotier'
+uci commit zerotier
+
+3. Start
+/etc/init.d/zerotier enable
+/etc/init.d/zerotier start
+
+4. Configure OpenWrt
+
+1. Add a new interface
+Web interface, Network -> Interface, add a new interface
+name ZeroTier
+protocol, choose not to configure the protocol, and
+choose the adapter starting with z for the interface.
+Click the "Create Interface" button.
+In the "Firewall Settings" page that appears later, select " lan " for "Create/Assign Firewall Zone"
+Save and apply.
+
+2. Modify the protective wall
+Web interface, network->firewall->communication rules, add:
+name Allow-ZeroTier-Inbound
+protocol UDP
+source zone any zone
+target zone device
+target port 9993
+save & apply
+
+
+3. Restart OpenWrt
+reboot
+
+join, leave, list networks
+zerotier-cli join
+zerotier-cli leave
+zerotier-cli listnetworks
+
+
