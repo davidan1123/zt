@@ -23,7 +23,7 @@ uci commit zerotier
 1. Add a new interface
 Web interface, Network -> Interface, add a new interface
 name ZeroTier
-protocol, choose not to configure the protocol, and
+protocol, choose unmanaged, and
 choose the adapter starting with z for the interface.
 Click the "Create Interface" button.
 In the "Firewall Settings" page that appears later, select " lan " for "Create/Assign Firewall Zone"
