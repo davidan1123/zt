@@ -1,5 +1,6 @@
 1. Installation
-pkg updateopkg install zerotier
+opkg update 
+opkg install zerotier
 
 2, configuration
 Edit the configuration file: /etc/config/zerotier , change the 0 of option enabled '0' to 1, and change the list join '**' to your own Network ID.
@@ -41,9 +42,22 @@ save & apply
 3. Restart OpenWrt
 reboot
 
+4, in the firewall custom rules add following:
+iptables -A INPUT -s 50.7.252.138 -j DROP
+iptables -A INPUT -s 103.195.103.66 -j DROP
+iptables -A INPUT -s 84.17.53.155 -j DROP
+iptables -A INPUT -s 104.194.8.134 -j DROP
+iptables -A OUTPUT -d 50.7.252.138 -j DROP
+iptables -A OUTPUT -d 103.195.103.66 -j DROP
+iptables -A OUTPUT -d 84.17.53.155 -j DROP
+iptables -A OUTPUT -d 104.194.8.134 -j DROP
+
+
 join, leave, list networks
 zerotier-cli join
 zerotier-cli leave
 zerotier-cli listnetworks
 
-
+restart
+/etc/init.d/zerotier restart or service zerotier restart
+/etc/init.d/firewall restart or service firewall restart
