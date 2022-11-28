@@ -3,12 +3,11 @@ opkg update
 opkg install zerotier
 
 2, configuration
-Edit the configuration file: /etc/config/zerotier , change the 0 of option enabled '0' to 1, and change the list join '**' to your own Network ID.
-
-or
+#Edit the configuration file: /etc/config/zerotier , change the 0 of option enabled '0' to 1, and change the list join '**' to your own Network ID.
 
 mkdir -p /etc/zerotier
 uci set zerotier.openwrt_network=zerotier
+##########change private network ID ############
 uci add_list zerotier.openwrt_network.join='privatenetworkID'
 uci set zerotier.openwrt_network.enabled='1'
 uci set zerotier.openwrt_network.config_path='/etc/zerotier'
